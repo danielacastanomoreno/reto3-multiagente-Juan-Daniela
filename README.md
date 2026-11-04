@@ -59,7 +59,7 @@ docs/         informe.md
 
 ## Privacidad y observabilidad (LangSmith opcional)
 
-LangSmith **es una opción, no un requisito**. Sirve para observar y depurar las corridas de `triage eval` (pasos por
+LangSmith sirve para observar y depurar las corridas de `triage eval` (pasos por
 agente, latencias y consumo de tokens) desde su panel. Se puede activar cuando se quiera medir o revisar una corrida:
 
 ```bash
