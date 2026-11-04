@@ -11,12 +11,12 @@ diagnóstico. Fuera de alcance: diagnóstico, dosis/receta, historia clínica, i
 
 ## 2. Patrón y modelos
 **Router con guardrail determinista.** A0 (reglas con detección de negación, 0 tokens) decide las urgencias; si
-dispara, no se llama al modelo. El resto lo resuelve un LLM local (`qwen2.5:7b-instruct-q4_K_M`, Ollama) con salida
+dispara, no se llama al modelo. El resto lo resuelve un LLM local (`qwen2.5:3b`, Ollama) con salida
 JSON validada por Pydantic contra un Enum cerrado, un reintento de reparación y fallback a `medicina_general`.
 Se comparan tres configuraciones sobre el mismo dataset: **A** (1 llamada), **B** router + verificador (2) y
 **C** router + especialista + verificador (3). Descartados: orquestador–trabajadores, evaluador–optimizador en
 producción y pipeline fijo (no hay subtareas independientes, borradores que iterar ni etapas de investigación).
-El verificador usa el mismo 7B con otro prompt: con 8 GB de VRAM cambiar de modelo costaría 10–30 s por recarga.
+El verificador usa el mismo 3B con otro prompt: cambiar de modelo costaría 10–30 s por recarga.
 
 ## 3. Metodología
 Dataset de 30 viñetas escritas antes de ver resultados (12 claras, 6 ambiguas → `medicina_general`, 6 urgencias,

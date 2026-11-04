@@ -103,7 +103,7 @@ def cmd_doctor(_: argparse.Namespace) -> int:
     perfil, det = _hardware()
     print(f"Python {platform.python_version()} | {det} | perfil: {perfil}")
     if perfil != "GPU8":
-        print("  -> usar qwen2.5:3b-instruct-q4_K_M (TRIAGE_MODEL) y descartar la config C")
+        print("  -> mantener qwen2.5:3b (TRIAGE_MODEL) y descartar la config C")
     ok, det = healthcheck()
     print(("OK   " if ok else "FALLO ") + det)
     if not ok:

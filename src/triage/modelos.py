@@ -18,7 +18,7 @@ from pydantic import BaseModel
 from .catalogo import normalizar
 
 BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-MODELO_DEFECTO = os.getenv("TRIAGE_MODEL", "qwen2.5:7b-instruct-q4_K_M")
+MODELO_DEFECTO = os.getenv("TRIAGE_MODEL", "qwen2.5:3b")
 MODELO_JUEZ = os.getenv("TRIAGE_JUDGE_MODEL", "llama3.1:8b-instruct-q4_K_M")
 TIMEOUT_S = 120
 

@@ -1,5 +1,7 @@
 # Triaje por especialista (reto3 · IA2)
 
+**Autores:** Daniela Castaño Moreno · Juan José Ramos Henao
+
 Una persona escribe sus síntomas en una página simple y el sistema responde **a qué especialista debería acudir**.
 Patrón: *router con guardrail determinista* (signos de alarma por reglas, sin LLM) + triador LLM local (Ollama).
 Esto es orientación, **no un diagnóstico**. El dataset es sintético; no hay validación clínica.
@@ -11,8 +13,7 @@ Esto es orientación, **no un diagnóstico**. El dataset es sintético; no hay v
 ## Instalación
 ```bash
 uv sync --extra dev
-ollama pull qwen2.5:7b-instruct-q4_K_M      # GPU de 8 GB
-# sin GPU / 4–6 GB:  ollama pull qwen2.5:3b-instruct-q4_K_M  y  export TRIAGE_MODEL=qwen2.5:3b-instruct-q4_K_M
+ollama pull qwen2.5:3b                       # modelo de triaje (por defecto)
 ollama pull llama3.1:8b-instruct-q4_K_M      # juez offline (opcional, al final)
 cp .env.example .env
 ```
@@ -58,3 +59,28 @@ docs/         informe.md
 ## Privacidad
 LangSmith es opcional y SaaS: úsalo solo con el dataset sintético (`LANGSMITH_TRACING=true` en tu shell al correr `eval`).
 La app fuerza `LANGSMITH_TRACING=false`. No se guardan síntomas reales.
+
+## Comparación: un solo agente vs. arquitectura multiagente
+
+La configuración **A** representa el proyecto resuelto con **un solo agente de triaje** (más el guardrail
+determinista A0 y la plantilla de presentación A2). Las configuraciones **B** y **C** reparten el trabajo entre
+router, verificador y, en C, un especialista. La tabla resume cómo cambia el proyecto en cada caso; las cifras
+empíricas de calidad y latencia son las que se obtienen con `triage eval` y quedan en `data/resultados.csv`, no
+supuestos.
+
+| Dimensión | Un solo agente (config A) | Arquitectura multiagente (configs B y C) |
+|---|---|---|
+| Flujo | A0 guardia → A1 triador → A2 presentador | B: A0 → A4 router → A3 verificador → A2 · C: A0 → A4 → A5 especialista → A3 → A2 |
+| Llamadas al LLM | 1 | 2 (B) / 3 (C) |
+| Reparto de tareas | El mismo modelo interpreta los síntomas, elige la especialidad y redacta | Se separan enrutamiento, especialización y verificación |
+| Latencia esperada | Menor: una sola generación | Mayor: más llamadas y coordinación (en B, ~100 % del tiempo del LLM es coordinación) |
+| Calidad sobre catálogo cerrado | Buena línea base si el modelo local respeta el esquema JSON | No garantiza mejora: el router no aporta información clínica nueva y puede introducir errores en cascada |
+| Robustez | Fácil de acotar: un esquema, un fallback y un punto de fallo | Verificación cruzada y especialización, pero más puntos de fallo y más modos de degradación |
+| Depuración | Sencilla: una traza por solicitud | Más compleja: hay que revisar router, verificador y especialista por separado |
+| Costo y recursos | Mínimo: 1 llamada, menos tokens y menos tiempo de GPU/CPU | 2–3× llamadas y más tokens; exige más presupuesto de latencia |
+| Mantenibilidad | Baja complejidad y pocas piezas | Modular y extensible (por ejemplo, RAG por especialidad), pero con más código y configuración |
+| Cuándo conviene | Síntomas breves, catálogo pequeño, orientación no clínica y hardware limitado | Subtareas realmente independientes, verificación explícita o especialistas con conocimiento propio |
+
+**Conclusión del reto:** para este problema (texto breve y catálogo cerrado de 15 especialidades) el costo de B y C
+no se justifica de antemano. A es la línea base y B/C son experimentos para medir si la coordinación aporta algo;
+la comparación empírica se genera en `data/resultados.csv` y se analiza en `notebooks/01_informe.ipynb`.
