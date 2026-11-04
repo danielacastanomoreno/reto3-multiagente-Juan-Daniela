@@ -1,0 +1,31 @@
+[project]
+name = "triage"
+version = "0.1.0"
+description = "Sistema de triaje por especialista (reto3, IA2): router con guardrail determinista"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.5",
+    "pandas>=2.0",
+    "matplotlib>=3.7",
+    "langchain-ollama>=0.2",
+    "langsmith>=0.1",
+    "streamlit>=1.50",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23", "nbformat>=5", "nbclient>=0.10", "ipykernel>=6"]
+
+[project.scripts]
+triage = "triage.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/triage"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

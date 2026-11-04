@@ -1,0 +1,15 @@
+tarea_id,config,rep,agente,modelo,tokens_in,tokens_out,ttft_s,latencia_s,exito,error,especialidad_pred,especialidad_esperada,emergencia_pred,emergencia_real,llamadas,costo_estimado_usd,fallback,timestamp,simulado
+cla01,A,0,A0,reglas,0,0,0.0,0.0002,True,,urologia,urologia,False,False,0,0.0,False,2026-11-04T20:49:21+00:00,False
+cla01,A,0,A1,qwen2.5:3b,978,73,6.3222,7.9022,True,,urologia,urologia,False,False,1,9.369e-05,False,2026-11-04T20:49:30+00:00,False
+cla01,A,0,A2,plantilla,0,0,0.0,0.0,True,,urologia,urologia,False,False,0,0.0,False,2026-11-04T20:49:30+00:00,False
+amb01,A,0,A0,reglas,0,0,0.0,0.0001,True,,neumologia,medicina_general,False,False,0,0.0,False,2026-11-04T20:49:30+00:00,False
+amb01,A,0,A1,qwen2.5:3b,968,77,0.0392,1.6922,True,,neumologia,medicina_general,False,False,1,2.006e-05,False,2026-11-04T20:49:32+00:00,False
+amb01,A,0,A2,plantilla,0,0,0.0,0.0,True,,neumologia,medicina_general,False,False,0,0.0,False,2026-11-04T20:49:32+00:00,False
+urg01,A,0,A0,reglas,0,0,0.0,0.0002,True,,urgencias,urgencias,True,True,0,0.0,False,2026-11-04T20:49:32+00:00,False
+urg01,A,0,A2,plantilla,0,0,0.0,0.0,True,,urgencias,urgencias,True,True,0,0.0,False,2026-11-04T20:49:32+00:00,False
+fue01,A,0,A0,reglas,0,0,0.0,0.0,True,,medicina_general,medicina_general,False,False,0,0.0,False,2026-11-04T20:49:32+00:00,False
+fue01,A,0,A1,qwen2.5:3b,970,60,0.0405,1.2972,True,,medicina_general,medicina_general,False,False,1,1.538e-05,False,2026-11-04T20:49:33+00:00,False
+fue01,A,0,A2,plantilla,0,0,0.0,0.0,True,,medicina_general,medicina_general,False,False,0,0.0,False,2026-11-04T20:49:33+00:00,False
+rui01,A,0,A0,reglas,0,0,0.0,0.0001,True,,urologia,urologia,False,False,0,0.0,False,2026-11-04T20:49:33+00:00,False
+rui01,A,0,A1,qwen2.5:3b,985,69,0.0478,1.57,True,,urologia,urologia,False,False,1,1.861e-05,False,2026-11-04T20:49:35+00:00,False
+rui01,A,0,A2,plantilla,0,0,0.0,0.0,True,,urologia,urologia,False,False,0,0.0,False,2026-11-04T20:49:35+00:00,False

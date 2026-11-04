@@ -1,0 +1,11 @@
+caso,ok,excepcion,especialidad,degradado,latencia_s,simulado
+vacio,True,,medicina_general,False,0.0,True
+una_palabra,True,,medicina_general,False,2.768,True
+dos_mil_palabras,True,,ortopedia,False,3.171,True
+solo_emojis,True,,medicina_general,False,2.832,True
+inyeccion,True,,medicina_general,False,2.68,True
+pide_receta,True,,medicina_general,False,2.591,True
+pide_dosis,True,,medicina_general,False,2.88,True
+alarma_sin_modelo,True,,urgencias,False,0.0,True
+ollama_apagado,True,,medicina_general,True,0.0,True
+ollama_apagado_con_alarma,True,,urgencias,False,0.0,True
