@@ -57,10 +57,6 @@ data/         resultados.csv, trazas.csv (reales) · dryrun/ (simulados, ignorad
 docs/         informe.md
 ```
 
-## Privacidad
-LangSmith es opcional y SaaS: úsalo solo con el dataset sintético (`LANGSMITH_TRACING=true` en tu shell al correr `eval`).
-La app fuerza `LANGSMITH_TRACING=false`. No se guardan síntomas reales.
-
 ## Comparación: un solo agente vs. arquitectura multiagente
 
 La configuración **A** representa el proyecto resuelto con **un solo agente de triaje** (más el guardrail
