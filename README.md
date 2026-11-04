@@ -1,6 +1,7 @@
-# Triaje por especialista (reto3 · IA2)
+# Clasificación de Especialista según Síntomas
 
-**Autores:** Daniela Castaño Moreno · Juan José Ramos Henao
+* **Daniela Castaño Moreno**
+* **Juan José Ramos Henao**
 
 Una persona escribe sus síntomas en una página simple y el sistema responde **a qué especialista debería acudir**.
 Patrón: *router con guardrail determinista* (signos de alarma por reglas, sin LLM) + triador LLM local (Ollama).
